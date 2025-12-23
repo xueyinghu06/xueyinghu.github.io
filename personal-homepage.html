@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唯庸 - AI Agent 布道者</title>
+    <!-- Tailwind CSS v3.0+ -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 自定义Tailwind配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        secondary: '#8b5cf6',
+                        accent: '#ec4899',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-gradient {
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .bg-gradient-primary {
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            }
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .hover-lift:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-800">
+    <!-- 导航栏 -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-primary text-gradient">唯庸</span>
+                    </a>
+                </div>
+
+                <!-- 桌面端导航 -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-700 hover:text-primary transition-colors font-medium">关于我</a>
+                    <a href="#projects" class="text-gray-700 hover:text-primary transition-colors font-medium">作品</a>
+                    <a href="#social" class="text-gray-700 hover:text-primary transition-colors font-medium">社交</a>
+                </nav>
+
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="p-2 rounded-md text-gray-700 hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 移动端导航菜单 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-3 space-y-1">
+                <a href="#about" class="block py-2 text-gray-700 hover:text-primary transition-colors font-medium">关于我</a>
+                <a href="#projects" class="block py-2 text-gray-700 hover:text-primary transition-colors font-medium">作品</a>
+                <a href="#social" class="block py-2 text-gray-700 hover:text-primary transition-colors font-medium">社交</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main>
+        <!-- 英雄区域 -->
+        <section class="pt-32 pb-20 bg-gradient-to-br from-gray-50 to-gray-100">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                    <!-- 左侧内容 -->
+                    <div class="md:w-1/2 space-y-6">
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                            <span class="block">AI Agent 布道者</span>
+                            <span class="block bg-gradient-primary text-gradient">唯庸</span>
+                        </h1>
+                        <p class="text-xl text-gray-600">
+                            数字游民 · 开源社区主理人 · 效率革命推动者
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="#about" class="px-8 py-3 bg-gradient-primary text-white rounded-lg font-medium hover-lift">
+                                了解更多
+                            </a>
+                            <a href="#projects" class="px-8 py-3 bg-white text-primary border border-primary rounded-lg font-medium hover:bg-primary/5 transition-colors hover-lift">
+                                查看作品
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 右侧图片 -->
+                    <div class="md:w-1/2">
+                        <div class="relative">
+                            <div class="absolute -top-4 -left-4 w-full h-full bg-gradient-primary rounded-2xl opacity-20 blur-xl"></div>
+                            <img src="https://picsum.photos/1920/1080?random=1" alt="AI Agent" class="relative w-full h-auto rounded-2xl shadow-2xl hover-lift">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我部分 -->
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">关于我</h2>
+                    <div class="w-20 h-1 bg-gradient-primary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="max-w-4xl mx-auto space-y-8">
+                    <div class="bg-gray-50 rounded-xl p-8 shadow-sm">
+                        <h3 class="text-2xl font-bold mb-4">唯庸 | AI Agent 布道者</h3>
+                        <div class="prose prose-lg max-w-none">
+                            <p>前字节跳动AI产品经理（参与豆包/剪映/扣子底层模型能力数据支持）</p>
+                            <p>现AI智能体培训讲师（3000+学员认证）</p>
+                            <p>独立产品经理 | Agent 101开源社区主理人</p>
+                            <p>AI编程蓝皮书共创作者 / Coze社区核心开发者</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-gray-50 rounded-xl p-8 shadow-sm">
+                            <h4 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-briefcase text-primary mr-2"></i>
+                                专业经历
+                            </h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>企业AI转型咨询：已助力20+团队完成智能体工作流部署</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>「万人智能体计划」：用AI解放10000人的生产力</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                    <span>独立产品：使用AI不写一行代码，实现产品商业化</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-xl p-8 shadow-sm">
+                            <h4 class="text-xl font-semibold mb-4 flex items-center">
+                                <i class="fas fa-rocket text-primary mr-2"></i>
+                                使命愿景
+                            </h4>
+                            <p class="text-gray-700">
+                                推进AI普惠，人人都能用AI，人人都能用好AI。通过开源社区和教育培训，让更多人掌握AI智能体技术，实现工作效率的革命性提升。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作品部分 -->
+        <section id="projects" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">我的作品</h2>
+                    <div class="w-20 h-1 bg-gradient-primary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 项目卡片1 -->
+                    <a href="https://hongbao.agent101.cn/" target="_blank" class="bg-white rounded-xl overflow-hidden shadow-sm hover-lift group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://picsum.photos/800/600?random=2" alt="春节红包封面生成工具" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div class="p-4">
+                                    <i class="fas fa-link text-white text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">春节红包封面生成工具</h3>
+                            <p class="text-gray-600 mb-4">https://hongbao.agent101.cn/</p>
+                            <div class="flex items-center text-primary">
+                                <span class="mr-2">查看项目</span>
+                                <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 项目卡片2 -->
+                    <a href="https://jueming.agent101.cn/" target="_blank" class="bg-white rounded-xl overflow-hidden shadow-sm hover-lift group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://picsum.photos/800/600?random=3" alt="决明子-AI辅助决策工具" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div class="p-4">
+                                    <i class="fas fa-link text-white text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">决明子-AI辅助决策工具</h3>
+                            <p class="text-gray-600 mb-4">https://jueming.agent101.cn/</p>
+                            <div class="flex items-center text-primary">
+                                <span class="mr-2">查看项目</span>
+                                <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 项目卡片3 -->
+                    <a href="https://agent101.feishu.cn/wiki/KLarwIA1piLrBYk7bf2cBf3HnNe" target="_blank" class="bg-white rounded-xl overflow-hidden shadow-sm hover-lift group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://picsum.photos/800/600?random=4" alt="Agent 101 智能体指北" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div class="p-4">
+                                    <i class="fas fa-link text-white text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Agent 101 智能体指北</h3>
+                            <p class="text-gray-600 mb-4">https://agent101.feishu.cn/wiki/KLarwIA1piLrBYk7bf2cBf3HnNe</p>
+                            <div class="flex items-center text-primary">
+                                <span class="mr-2">查看项目</span>
+                                <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 项目卡片4 -->
+                    <a href="https://agent101.cn/" target="_blank" class="bg-white rounded-xl overflow-hidden shadow-sm hover-lift group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://picsum.photos/800/600?random=5" alt="唯庸的AI公开课" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div class="p-4">
+                                    <i class="fas fa-link text-white text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">唯庸的AI公开课</h3>
+                            <p class="text-gray-600 mb-4">https://agent101.cn/</p>
+                            <div class="flex items-center text-primary">
+                                <span class="mr-2">查看项目</span>
+                                <i class="fas fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- 项目卡片5 -->
+                    <a href="#" class="bg-white rounded-xl overflow-hidden shadow-sm hover-lift group">
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://picsum.photos/800/600?random=6" alt="《AI应用从小白到专家》" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                <div class="p-4">
+                                    <i class="fas fa-link text-white text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">《AI应用从小白到专家》</h3>
+                            <p class="text-gray-600 mb-4">书籍出版中</p>
+                            <div class="flex items-center text-primary">
+                                <span class="mr-2">持续更新</span>
+                                <i class="fas fa-spinner fa-spin"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 社交部分 -->
+        <section id="social" class="py-20 bg-white">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl sm:text-4xl font-bold mb-4">社交账号</h2>
+                    <div class="w-20 h-1 bg-gradient-primary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="max-w-4xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- 社交卡片 -->
+                        <a href="https://okjk.co/GzVOHr" target="_blank" class="bg-gray-50 rounded-xl p-8 shadow-sm hover-lift transition-all hover:bg-gray-100">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-gradient-primary rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-comment-dots text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">即刻</h3>
+                                    <p class="text-gray-600">https://okjk.co/GzVOHr</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="https://space.bilibili.com/3546742760934321" target="_blank" class="bg-gray-50 rounded-xl p-8 shadow-sm hover-lift transition-all hover:bg-gray-100">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-[#00a1d6] rounded-lg flex items-center justify-center">
+                                    <i class="fab fa-bilibili text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">bilibili</h3>
+                                    <p class="text-gray-600">https://space.bilibili.com/3546742760934321</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="bg-gray-50 rounded-xl p-8 shadow-sm hover-lift transition-all hover:bg-gray-100">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-[#07c160] rounded-lg flex items-center justify-center">
+                                    <i class="fab fa-weixin text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">微信</h3>
+                                    <p class="text-gray-600">wangweiyong0219</p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#" class="bg-gray-50 rounded-xl p-8 shadow-sm hover-lift transition-all hover:bg-gray-100">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-16 h-16 bg-[#ed4159] rounded-lg flex items-center justify-center">
+                                    <i class="fab fa-weixin text-white text-2xl"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold">公众号/视频号</h3>
+                                    <p class="text-gray-600">唯庸AI进化论</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold">唯庸</span>
+                    </div>
+                    <p class="text-gray-400">AI Agent 布道者，用AI解放10000人的生产力</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">关于我</a></li>
+                        <li><a href="#projects" class="text-gray-400 hover:text-white transition-colors">作品</a></li>
+                        <li><a href="#social" class="text-gray-400 hover:text-white transition-colors">社交</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">联系我</h4>
+                    <p class="text-gray-400 mb-2">微信：wangweiyong0219</p>
+                    <div class="flex space-x-4">
+                        <a href="https://okjk.co/GzVOHr" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fas fa-comment-dots"></i>
+                        </a>
+                        <a href="https://space.bilibili.com/3546742760934321" target="_blank" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#00a1d6] transition-colors">
+                            <i class="fab fa-bilibili"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-500">
+                <p>&copy; 2025 唯庸. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // 关闭移动端菜单
+                    mobileMenu.classList.add('hidden');
+                    // 滚动到目标位置
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
